@@ -1,0 +1,36 @@
+es:
+  devise:
+    failure:
+      invalid: "Tu email y/o contraseña son inválidas. Intenta nuevamente."
+      not_found_in_database: "Tu email y/o contraseña son inválidas. Intenta nuevamente."
+    sessions:
+      already_authenticated: "El usuario ha ingresado"
+      already_signed_out: "El usuario ha salido"
+      signed_in: "El usuario ha ingresado"
+      signed_out: "El usuario ha salido"
+    registrations: 
+      signed_up: "¡Bienvenido! Te has registrado correctamente"
+  errors:
+    messages: 
+      blank: "no puede estar en blanco"
+      invalid: "es inválido"
+      too_short: "es demasiado corto"
+      confirmation: "no coincide" 
+  
+
+
+  activerecord:
+    attributes:
+      user:
+        email: "Correo"
+        password: "Contraseña"
+        password_confirmation: "Contraseña de confirmación"
+      question:
+        title: "Título"
+        content: "Descripción"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "ingresado ya existe"

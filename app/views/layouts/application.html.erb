@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FlowOverstack</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style type="text/css">
+    body{
+      min-width: 400px;
+    }
+    .navbar{
+      border-radius: 0px;
+    }
+    </style>
+  </head>
+
+  <body>
+    <nav style="margin-bottom: 0px;" class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Flowoverstack</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li style="margin-top: 8px;">
+            <input class="form-control" id="myInput" type="text" placeholder="Buscar">
+          </li>
+          <li>
+            <% if user_signed_in? == false %>
+              <a href="/users/sign_in">Ingresar</a>
+            <% end %>
+          </li>
+          <li>
+            <% if user_signed_in? == false %>
+              <a href="/users/sign_up">Registrarse</a>
+            <% end %>
+          </li>
+          <li>
+            <% if user_signed_in? %>
+              <%= link_to "Salir", destroy_user_session_path, method: :delete %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <%= flash[:alert] %>    
+      </div>
+    <% end %>
+    <%= yield %>
+    <script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
+  </body>
+</html>

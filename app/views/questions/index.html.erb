@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Preguntas</h1>
+</div>
+
+<div class="container">
+  <% if user_signed_in? %>
+    <a type="button" href="/questions/new" class="btn btn-primary" style="float: right;">Hacer una pregunta</a>
+    <br><br><br>
+  <% else %>
+    <a type="button" href="/users/sign_in" class="btn btn-primary" style="float:right;">Hacer una pregunta</a><br><br><br>
+  <% end %>
+</div>
+
+<div class="container">            
+  <table class="table">
+    <tbody id="myTable">
+      <% @question.each do |i| %>
+        <tr>
+          <td>
+            <div class="text-center"><%= i.votes.length %></div>
+            <div class="text-center" >votos</div>
+          </td>
+          <td>
+            <div class="text-center"><%= i.answers.length %></div>
+            <div class="text-center">respuestas</div>
+          </td>
+          <td>
+            <a href="/questions/<%= i.id %>"><%= i.title %></a>
+            <div class="small">Publicado por <%= i.user.email %> el <%= i.created_at %></div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+
