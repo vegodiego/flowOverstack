@@ -1,222 +1,214 @@
 <div class="container">
 
-	<div class="row">
-		<h1 style="margin-bottom: 40px;"><%= @question.title %></h1>
-		<div class="col-xs-2">
-			<% if user_signed_in? %>
-			  <% if @voteExist %>
-			    <div class="text-center">
-			    	<a href="/questions/<%= @question.id %>/votes/<%= @voteE.id %>" data-method="delete">
-			    		<span class="glyphicon glyphicon-chevron-up" style="font-size: 30px;"></span>
-			    	</a>
-			    	<div>
-			    		<input type="submit" style="visibility: hidden;" />
-			    	</div>
-			    	<div><%= @question.votes.length %></div>
-			    </div>
-			  <% else %>
-			    <%= form_for [@question, @vote], html: {class: 'text-center', data: { bar: 'baz' } } do |f| %>
-			      <div>
-			      	<label for="t">
-			      		<span class="glyphicon glyphicon-chevron-up" style="font-size: 30px"></span>
-			        </label>
-			      </div>
-			      <div>
-			      	<input type="submit" data-disable-with="Create" id="t" style="visibility: hidden;" />
-			      </div>
-			      <div>
-			      	<input id="commAns" name="commAns" type="hidden" value="1" />
-			      </div>
-			      <div>
-			      	<input id="idCommAns" name="idCommAns" type="hidden" value="<%= @question.id %>" />
-			      </div>
-			      <div>
-			      	<input id="user_id" name="user_id" type="hidden" value="<%= @user.id %>" />
-			      </div>
-			    <% end %>
-			    <div class="text-center"><%= @question.votes.length %></div>
-			  <% end %>
-			<% else %>
-			  <div class="text-center">
-			  	<span class="glyphicon glyphicon-chevron-up" style="font-size: 30px;"></span>
-			  	<div>
-			  		<input type="submit" style="visibility: hidden;" />
-			  	</div>
-			  	<div><%= @question.votes.length %></div>
-			  </div>
-			<% end %>
-		</div>
-		<div class="col-xs-10"><%= markdown(@question.content) %></div>
-	</div>
+    <div class="row">
+        <h1 style="margin-bottom: 40px;"><%= @question.title %></h1>
+        <div class="col-xs-2">
+            <% if user_signed_in? %>
+              <% if @voteExist %>
+                <div class="text-center">
+                    <a href="/questions/<%= @question.id %>/votes/<%= @voteE.id %>" data-method="delete">
+                        <span class="glyphicon glyphicon-chevron-up" style="font-size: 30px;"></span>
+                    </a>
+                    <div>
+                        <input type="submit" style="visibility: hidden;" />
+                    </div>
+                    <div><%= @question.votes.length %></div>
+                </div>
+              <% else %>
+                <%= form_for [@question, @vote], html: {class: 'text-center', data: { bar: 'baz' } } do |f| %>
+                  <div>
+                    <label for="t">
+                        <span class="glyphicon glyphicon-chevron-up" style="font-size: 30px"></span>
+                    </label>
+                  </div>
+                  <div>
+                    <input type="submit" data-disable-with="Create" id="t" style="visibility: hidden;" />
+                  </div>
+                  <div>
+                    <input id="commAns" name="commAns" type="hidden" value="1" />
+                  </div>
+                  <div>
+                    <input id="idCommAns" name="idCommAns" type="hidden" value="<%= @question.id %>" />
+                  </div>
+                  <div>
+                    <input id="user_id" name="user_id" type="hidden" value="<%= @user.id %>" />
+                  </div>
+                <% end %>
+                <div class="text-center"><%= @question.votes.length %></div>
+              <% end %>
+            <% else %>
+              <div class="text-center">
+                <span class="glyphicon glyphicon-chevron-up" style="font-size: 30px;"></span>
+                <div>
+                    <input type="submit" style="visibility: hidden;" />
+                </div>
+                <div><%= @question.votes.length %></div>
+              </div>
+            <% end %>
+        </div>
+        <div class="col-xs-10"><%= markdown(@question.content) %></div>
+    </div>
 
-	<div class="row">
-		<% @questionComments.each do |i| %>
-		  <div class="col-xs-2"></div>
-		  <div class="col-xs-10">
-		  	<div class="panel panel-default">
-		  		<div class="panel-body"><%= i.content %></div>
-		  	</div>
-		  </div>
-		<% end %>
-	</div>
+    <div class="row">
+        <% @questionComments.each do |i| %>
+          <div class="col-xs-2"></div>
+          <div class="col-xs-10">
+            <div class="panel panel-default">
+                <div class="panel-body"><%= i.content %></div>
+            </div>
+          </div>
+        <% end %>
+    </div>
 
-	<div class="row">
-		<div class="col-xs-2"></div>
-		<div class="col-xs-10">
-			<% if user_signed_in? %>
-
-			  
-
-			  <%= form_for [@question, @comment] do |f| %>
-			    <div class="form-group">
-			    	<%= f.text_area :content, class: "form-control", placeholder: "Agregar comentario" %>
-			    </div>
-			    <div>
-			    	<input id="commAns" name="commAns" type="hidden" value="1" />
-			    </div>
-			    <div>
-			    	<input id="idCommAns" name="idCommAns" type="hidden" value="<%= @question.id %>" />
-			    </div>
-			    <div class="actions">
-			    	<%= f.submit "comentar", class: "btn btn-primary" %>
-			    </div>
-			  <% end %>
-			<% end %>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-10">
+            <% if user_signed_in? %>
+              <%= form_for [@question, @comment] do |f| %>
+                <div class="form-group">
+                    <%= f.text_area :content, class: "form-control", placeholder: "Agregar comentario" %>
+                </div>
+                <div>
+                    <input id="commAns" name="commAns" type="hidden" value="1" />
+                </div>
+                <div>
+                    <input id="idCommAns" name="idCommAns" type="hidden" value="<%= @question.id %>" />
+                </div>
+                <div class="actions">
+                    <%= f.submit "comentar", class: "btn btn-primary" %>
+                </div>
+              <% end %>
+            <% end %>
+        </div>
+    </div>
 </div> 
 
 
-	
-
 <div class="container">
-
-	<div style="margin-top: 50px;" class="row">
-		<h3><%= @question.answers.length %> Respuesta(s)</h3>
-		<hr>
-	</div>
-
-	<% @questionAnswer.each do |i| %>
-
-	  <div class="row">
-	  	<div class="col-xs-2">
-	  		<% if user_signed_in? %>
+    <div style="margin-top: 50px;" class="row">
+        <h3><%= @question.answers.length %> Respuesta(s)</h3>
+        <hr>
+    </div>
+    <% @questionAnswer.each do |i| %>
+      <div class="row">
+        <div class="col-xs-2">
+            <% if user_signed_in? %>
 
               <% @voteExist2 = false %>
-	  		  <% i.votes.each do |j| %>
-	  		    <% if current_user.id == j.user_id %>
-	  		      <% @voteExist2 = true %>
-	  		      <% @voteE2 = j %>
-	  		    <% end %>
-	  		  <% end %>
+              <% i.votes.each do |j| %>
+                <% if current_user.id == j.user_id %>
+                  <% @voteExist2 = true %>
+                  <% @voteE2 = j %>
+                <% end %>
+              <% end %>
 
-	  		  <% if @voteExist2 ==true %>
-	  		  <div class="text-center">
-	  		  	<a href="/questions/<%= @question.id %>/votes/<%= @voteE2.id %>" data-method="delete">
-	  		  		<span class="glyphicon glyphicon-chevron-up" style="font-size: 30px;"></span>
-	  		  	</a>
-	  		  	<div>
-	  		  		<input type="submit"  style="visibility: hidden;" />
-	  		  	</div>
-	  		  	<div><%= i.votes.length %></div>
-	  		  </div>
-	  		   
-	  		  <% else %>
-	  		    <%= form_for [@question, @vote], html: {class: 'text-center', data: { bar: 'baz' } } do |f| %>
-	  		      <div>
-	  		      	<label for="<%= i.id %>">
-	  		      		<span class="glyphicon glyphicon-chevron-up" style="font-size: 30px"></span>
-	  		        </label>
-	  		      </div>
-	  		      <div>
-	  		      	<input type="submit" data-disable-with="Create" id="<%= i.id %>" style="visibility: hidden;" />
-	  		      </div>
-	  		      <div>
-	  		      	<input id="commAns" name="commAns" type="hidden" value="2"/>
-	  		      </div>
-	  		      <div>
-	  		      	<input id="idCommAns" name="idCommAns" type="hidden" value="<%= i.id %>" />
-	  		      </div>
-	  		      <div>
-	  		      	<input id="user_id" name="user_id" type="hidden" value="<%= @user.id %>" />
-	  		      </div>
-	  		    <% end %>
-	  		    <div class="text-center"><%= i.votes.length %></div>
-	  		  <% end %>
+              <% if @voteExist2 ==true %>
+              <div class="text-center">
+                <a href="/questions/<%= @question.id %>/votes/<%= @voteE2.id %>" data-method="delete">
+                    <span class="glyphicon glyphicon-chevron-up" style="font-size: 30px;"></span>
+                </a>
+                <div>
+                    <input type="submit"  style="visibility: hidden;" />
+                </div>
+                <div><%= i.votes.length %></div>
+              </div>
+               
+              <% else %>
+                <%= form_for [@question, @vote], html: {class: 'text-center', data: { bar: 'baz' } } do |f| %>
+                  <div>
+                    <label for="<%= i.id %>">
+                        <span class="glyphicon glyphicon-chevron-up" style="font-size: 30px"></span>
+                    </label>
+                  </div>
+                  <div>
+                    <input type="submit" data-disable-with="Create" id="<%= i.id %>" style="visibility: hidden;" />
+                  </div>
+                  <div>
+                    <input id="commAns" name="commAns" type="hidden" value="2"/>
+                  </div>
+                  <div>
+                    <input id="idCommAns" name="idCommAns" type="hidden" value="<%= i.id %>" />
+                  </div>
+                  <div>
+                    <input id="user_id" name="user_id" type="hidden" value="<%= @user.id %>" />
+                  </div>
+                <% end %>
+                <div class="text-center"><%= i.votes.length %></div>
+              <% end %>
 
-	  		<% else %>
-	  		  <div class="text-center">
-	  		  	<span class="glyphicon glyphicon-chevron-up" style="font-size: 30px;"></span>
-	  		  	<div>
-	  		  		<input type="submit" style="visibility: hidden;" />
-	  		  	</div>
-	  		  	<div><%= i.votes.length %></div>
-	  		  </div>
-	  		<% end %> 
-	  	</div>
-	  	<div class="col-xs-10">
-	  		<div class="panel-body"><%= markdown(i.content) %></div>
-	  	</div>
-	  </div>
+            <% else %>
+              <div class="text-center">
+                <span class="glyphicon glyphicon-chevron-up" style="font-size: 30px;"></span>
+                <div>
+                    <input type="submit" style="visibility: hidden;" />
+                </div>
+                <div><%= i.votes.length %></div>
+              </div>
+            <% end %> 
+        </div>
+        <div class="col-xs-10">
+            <div class="panel-body"><%= markdown(i.content) %></div>
+        </div>
+      </div>
 
-	  <div class="row">
-	  	<div class="col-xs-2"></div>
-	  	<div class="col-xs-10">
-	  		<% i.comments.each do |j| %>
-	  		  <div class="panel panel-default">
-	  		    <div class="panel-body"><%= j.content %></div>
-	  		  </div>
-	  		<% end %>
-	  	</div>
-	  </div>
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-10">
+            <% i.comments.each do |j| %>
+              <div class="panel panel-default">
+                <div class="panel-body"><%= j.content %></div>
+              </div>
+            <% end %>
+        </div>
+      </div>
 
-	  <div class="row" style="margin-bottom: 60px;">
-	  	<div class="col-xs-2"></div>
-	  	<div class="col-xs-10">
-	  		<% if user_signed_in? %>
+      <div class="row" style="margin-bottom: 60px;">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-10">
+            <% if user_signed_in? %>
 
-	  		  <% if @comment.errors.any? %>
-	  		    <div class="alert alert-danger">
-	  		      <ul>
-	  		      <% @comment.errors.full_messages.each do |msg| %>
-	  		        <li><%= msg %></li>
-	  		      <% end %>
-	  		      </ul>
-	  		    </div>
-	  		  <% end %>
-	  		  
-	  		  <%= form_for [@question, @comment] do |f| %>
-	  		    <div class="form-group">
-	  		    	<%= f.text_area :content, class: "form-control", placeholder: "Agregar comentario" %>
-	  		    </div>
-	  		    <div>
-	  		    	<input id="commAns" name="commAns" type="hidden" value="2" />
-	  		    </div>
-	  		    <div>
-	  		    	<input id="idCommAns" name="idCommAns" type="hidden" value="<%= i.id %>" />
-	  		    </div>
-	  		    <div class="actions">
-	  		    	<%= f.submit "comentar", class: "btn btn-primary" %>
-	  		    </div>
-	  		  <% end %>
-	  		<% end %>
-	  	</div>
-	  </div>
-	<% end %>
+              <% if @comment.errors.any? %>
+                <div class="alert alert-danger">
+                  <ul>
+                  <% @comment.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              
+              <%= form_for [@question, @comment] do |f| %>
+                <div class="form-group">
+                    <%= f.text_area :content, class: "form-control", placeholder: "Agregar comentario" %>
+                </div>
+                <div>
+                    <input id="commAns" name="commAns" type="hidden" value="2" />
+                </div>
+                <div>
+                    <input id="idCommAns" name="idCommAns" type="hidden" value="<%= i.id %>" />
+                </div>
+                <div class="actions">
+                    <%= f.submit "comentar", class: "btn btn-primary" %>
+                </div>
+              <% end %>
+            <% end %>
+        </div>
+      </div>
+    <% end %>
 
-	<% if user_signed_in? %>
-	  <div class="row" style="margin-top: 50px; margin-bottom: 50px">
-	  	<% if user_signed_in? %>
-	  	  <%= form_for [@question, @answer] do |f| %>
-	  	    <div class="form-group">
-	  	    	<%= f.text_area :content, class: "form-control", placeholder: "Escribe tu respuesta" %>
-	  	    </div>
-	  	    <div class="actions">
-	  	    	<%= f.submit "Enviar respuesta", class: "btn btn-primary" %>
-	  	    </div>
-	  	  <% end %>
-	  	<% end %>
-	  </div>
-	<% end %>
+    <% if user_signed_in? %>
+      <div class="row" style="margin-top: 50px; margin-bottom: 50px">
+        <% if user_signed_in? %>
+          <%= form_for [@question, @answer] do |f| %>
+            <div class="form-group">
+                <%= f.text_area :content, class: "form-control", placeholder: "Escribe tu respuesta" %>
+            </div>
+            <div class="actions">
+                <%= f.submit "Enviar respuesta", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
 </div>
-  	
+    

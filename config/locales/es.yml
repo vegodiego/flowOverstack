@@ -3,6 +3,7 @@ es:
     failure:
       invalid: "Tu email y/o contraseña son inválidas. Intenta nuevamente."
       not_found_in_database: "Tu email y/o contraseña son inválidas. Intenta nuevamente."
+      unauthenticated: "Debe iniciar sesión o registrarse antes de continuar."
     sessions:
       already_authenticated: "El usuario ha ingresado"
       already_signed_out: "El usuario ha salido"
